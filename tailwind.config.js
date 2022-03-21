@@ -20,10 +20,11 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        mono: ['Menlo', ...defaultTheme.fontFamily.mono],
+        body: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       colors: {
-        primary: colors.teal,
+        primary: colors.red,
         //@ts-ignore
         gray: colors.neutral, // TODO: Remove ts-ignore after tw types gets updated to v3
       },
