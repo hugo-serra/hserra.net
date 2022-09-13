@@ -72,6 +72,8 @@ I wanted it to be nearly as feature-rich as popular blogging templates like [bea
 - Projects page
 - Preconfigured security headers
 - SEO friendly with RSS feed, sitemaps and more!
+- Resume Page using [jsonresume](https://jsonresume.org/)
+- Resume pdf download using [react-pdf](https://react-pdf.org/)
 
 ## Sample posts
 

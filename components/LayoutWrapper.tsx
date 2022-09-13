@@ -23,7 +23,6 @@ const LayoutWrapper = ({ children }: Props) => {
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div className="flex items-center justify-between">
                 <div className="mr-3">
-                  {/* <Logo /> */}
                   <div className="typewriter">
                     <h1 className="text-2xl font-extrabold">
                       <span className="font-black tracking-tighter text-red-500">{'</> '}</span>
@@ -31,13 +30,13 @@ const LayoutWrapper = ({ children }: Props) => {
                     </h1>
                   </div>
                 </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
+                {/* {typeof siteMetadata.headerTitle === 'string' ? (
                   <div className="hidden text-2xl font-semibold xl:block">
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
                   siteMetadata.headerTitle
-                )}
+                )} */}
               </div>
             </Link>
           </div>

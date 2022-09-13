@@ -8,6 +8,11 @@ import { ComponentProps } from 'react'
 export const POSTS_PER_PAGE = 5
 
 import resume from '@/resume/resume.json'
+import ResumeHeader from '@/components/resume/ResumeHeader'
+import ResumeSkills from '@/components/resume/ResumeSkills'
+import ResumeTimeline from '@/components/resume/ResumeTimeline'
+import ResumeEducation from '@/components/resume/ResumeEducation'
+import ResumeProjects from '@/components/resume/ResumeProjects'
 
 export const getStaticProps: GetStaticProps<{
   posts: ComponentProps<typeof ListLayout>['posts']
@@ -32,6 +37,11 @@ export default function Blog({
   return (
     <>
       <PageSEO title={`Resume - ${siteMetadata.author}`} description={siteMetadata.description} />
+      <ResumeHeader resume={resume} />
+      <ResumeSkills />
+      <ResumeTimeline />
+      <ResumeEducation />
+      <ResumeProjects />
       <pre>{JSON.stringify(resume, null, 2)}</pre>
     </>
   )
