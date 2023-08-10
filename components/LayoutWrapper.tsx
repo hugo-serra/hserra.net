@@ -45,7 +45,7 @@ const LayoutWrapper = ({ children }: Props) => {
               {headerNavLinks.map((link) => (
                 <>
                   <Link
-                    key={link.title}
+                    key={'link-' + link.title}
                     href={link.href}
                     className={
                       'p-1 font-medium sm:p-4' +
@@ -56,7 +56,7 @@ const LayoutWrapper = ({ children }: Props) => {
                   >
                     {link.title}
                   </Link>
-                  <span>/</span>
+                  <span key={'span-' + link.title}>/</span>
                 </>
               ))}
             </div>
