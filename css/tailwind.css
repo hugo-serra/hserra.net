@@ -52,3 +52,10 @@ input:-webkit-autofill:focus {
     border-color: theme('colors.primary.500');
   }
 }
+
+@font-face {
+  font-family: 'Courier Prime';
+  src: url('../public/static/fonts/courier-prime.ttf') format('truetype');
+  font-weight: normal;
+  font-style: serif;
+}

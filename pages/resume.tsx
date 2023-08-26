@@ -1,48 +1,50 @@
-import { getAllFilesFrontMatter } from '@/lib/mdx'
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayout'
 import { PageSEO } from '@/components/SEO'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { ComponentProps } from 'react'
+import { InferGetServerSidePropsType } from 'next'
 
 export const POSTS_PER_PAGE = 5
 
-import resume from '@/resume/resume.json'
 import ResumeHeader from '@/components/resume/ResumeHeader'
-import ResumeSkills from '@/components/resume/ResumeSkills'
 import ResumeTimeline from '@/components/resume/ResumeTimeline'
 import ResumeEducation from '@/components/resume/ResumeEducation'
 import ResumeProjects from '@/components/resume/ResumeProjects'
+import ResumeQuote from '@/components/resume/ResumeQuote'
+import ResumeSummary from '@/components/resume/ResumeSummary'
+import ResumeSkills2 from '@/components/resume/ResumeSkills2'
+import ResumePublications from '@/components/resume/ResumePublications'
+import ResumeLanguages from '@/components/resume/ResumeLanguages'
 
-export const getStaticProps: GetStaticProps<{
-  posts: ComponentProps<typeof ListLayout>['posts']
-  initialDisplayPosts: ComponentProps<typeof ListLayout>['initialDisplayPosts']
-  pagination: ComponentProps<typeof ListLayout>['pagination']
-}> = async () => {
-  const posts = await getAllFilesFrontMatter('blog')
-  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
-  const pagination = {
-    currentPage: 1,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-  }
+export const getServerSideProps = async () => {
+  const resume = await import(`@/resume/resume.json`).then((m) => m.default)
+  /* Get resume from gitconnected API */
+  const remoteResume = await fetch('https://gitconnected.com/v1/portfolio/hugo-serra').then((res) =>
+    res.json()
+  )
 
-  return { props: { initialDisplayPosts, posts, pagination } }
+  return { props: { resume: remoteResume || resume } }
 }
 
-export default function Blog({
-  posts,
-  initialDisplayPosts,
-  pagination,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Blog({ resume }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <PageSEO title={`Resume - ${siteMetadata.author}`} description={siteMetadata.description} />
-      <ResumeHeader resume={resume} />
-      <ResumeSkills />
-      <ResumeTimeline />
-      <ResumeEducation />
-      <ResumeProjects />
-      <pre>{JSON.stringify(resume, null, 2)}</pre>
+      <div className="grid grid-cols-1 gap-y-8 p-5 print:grid-cols-4 print:gap-x-5 print:gap-y-1">
+        <div className="col-span-1 print:col-span-4 print:mb-0">
+          <ResumeHeader resume={resume} />
+        </div>
+        <div className="col-span-1 print:col-span-4 print:mb-0">
+          <ResumeQuote text={resume.basics.headline} />
+          <ResumeSummary summary={resume.basics.summary} />
+        </div>
+        <div className="col-span-1 print:col-span-4 print:mb-0">
+          <ResumeLanguages languagesData={resume.languages} />
+          <ResumeSkills2 skills={resume.skills} />
+          <ResumeTimeline resume={resume} />
+          <ResumeEducation educationData={resume.education} />
+          {/* <ResumeProjects /> */}
+          <ResumePublications publications={resume.publications} />
+        </div>
+      </div>
     </>
   )
 }

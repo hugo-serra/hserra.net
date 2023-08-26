@@ -22,6 +22,7 @@ module.exports = {
       fontFamily: {
         mono: ['Menlo', ...defaultTheme.fontFamily.mono],
         body: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
+        serif: ['Courier Prime', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         primary: colors.red,
