@@ -1,11 +1,10 @@
-const fs = require('fs')
-const globby = require('globby')
-const matter = require('gray-matter')
-const prettier = require('prettier')
-const siteMetadata = require('../data/siteMetadata')
-
+import { existsSync, readFileSync, writeFileSync } from 'fs'
+import globby from 'globby'
+import matter from 'gray-matter'
+import { resolveConfig, format } from 'prettier'
+import { siteUrl } from '../data/siteMetadata'
 ;(async () => {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
+  const prettierConfig = await resolveConfig('./.prettierrc.js')
   const pages = await globby([
     'pages/*.js',
     'pages/*.tsx',
@@ -23,8 +22,8 @@ const siteMetadata = require('../data/siteMetadata')
             ${pages
               .map((page) => {
                 // Exclude drafts from the sitemap
-                if (page.search('.md') >= 1 && fs.existsSync(page)) {
-                  const source = fs.readFileSync(page, 'utf8')
+                if (page.search('\\.md') >= 1 && existsSync(page)) {
+                  const source = readFileSync(page, 'utf8')
                   const fm = matter(source)
                   if (fm.data.draft) {
                     return
@@ -37,10 +36,10 @@ const siteMetadata = require('../data/siteMetadata')
                   .replace('pages/', '/')
                   .replace('data/blog', '/blog')
                   .replace('public/', '/')
-                  .replace('.js', '')
-                  .replace('.tsx', '')
-                  .replace('.mdx', '')
-                  .replace('.md', '')
+                  .replace(/\.js$/, '')
+                  .replace(/\.tsx$/, '')
+                  .replace(/\.mdx$/, '')
+                  .replace(/\.md$/, '')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
                 if (page.search('pages/404.') > -1 || page.search(`pages/blog/[...slug].`) > -1) {
@@ -48,7 +47,7 @@ const siteMetadata = require('../data/siteMetadata')
                 }
                 return `
                         <url>
-                            <loc>${siteMetadata.siteUrl}${route}</loc>
+                            <loc>${siteUrl}${route}</loc>
                         </url>
                     `
               })
@@ -56,11 +55,11 @@ const siteMetadata = require('../data/siteMetadata')
         </urlset>
     `
 
-  const formatted = prettier.format(sitemap, {
+  const formatted = format(sitemap, {
     ...prettierConfig,
     parser: 'html',
   })
 
   // eslint-disable-next-line no-sync
-  fs.writeFileSync('public/sitemap.xml', formatted)
+  writeFileSync('public/sitemap.xml', formatted)
 })()
