@@ -9,6 +9,7 @@ import {
   FaHackerrank,
 } from 'react-icons/fa'
 import { IoShareSocialOutline } from 'react-icons/io5'
+import ContactForm from '../ContactMe'
 
 export default function ResumeHeader({ resume }) {
   const data = resume.basics
@@ -48,9 +49,8 @@ export default function ResumeHeader({ resume }) {
         <h2 className="text-center text-xl text-gray-700 dark:text-gray-300 md:text-left">
           {data.label}
         </h2>
-        <div className="flex items-center justify-center space-x-2 md:justify-start">
-          <FaMailBulk className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-          <p className="text-gray-500 dark:text-gray-400">{data.email}</p>
+        <div className="flex items-center justify-center space-x-2 md:justify-start cursor-pointer">
+          <ContactForm />
         </div>
         <div className="flex items-center justify-center space-x-2 md:justify-start">
           <FaMapMarkerAlt className="h-5 w-5 text-gray-500 dark:text-gray-400" />

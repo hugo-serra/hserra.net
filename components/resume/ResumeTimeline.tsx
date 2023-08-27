@@ -5,7 +5,10 @@ export default function ResumeTimeline({ resume }) {
       <div className="relative m-4">
         <div className="absolute top-0 bottom-0 left-5 border-l-2 border-gray-300 dark:border-gray-600"></div>
         {resume.work.map((exp, index) => (
-          <div key={index} className="relative mb-8 pl-10 font-mono text-black dark:text-white">
+          <div
+            key={index}
+            className="relative mb-8 pl-10 font-mono text-black dark:text-white break-inside-avoid"
+          >
             <div className="absolute -left-5 top-1 h-8 w-8 rounded-full bg-red-500"></div>
             <div className="flex items-center space-x-4">
               <h3 className="text-lg font-semibold">{exp.name}</h3>

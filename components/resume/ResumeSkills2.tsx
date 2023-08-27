@@ -23,12 +23,14 @@ function SkillsList({ skills }) {
       {skills.map((skill) => (
         <div
           key={skill.name}
-          className="flex flex-row items-center space-x-4 border-b p-2 dark:border-gray-700 print:p-1"
+          className="flex flex-row items-center space-x-4 border-b p-2 dark:border-gray-700 print:p-1 break-inside-avoid"
         >
           {getIconForSkill(skill.name)}
           <div className="flex-1">
             <h4 className="mb-1 font-mono text-xl print:text-lg">{skill.name}</h4>
-            <p className="mt-1 font-mono text-sm text-cyan-600 dark:text-cyan-500">{skill.level}</p>
+            <p className="mt-1 text-sm text-cyan-600 dark:text-cyan-500 font-serif">
+              {skill.level}
+            </p>
             <div className="mt-1 flex flex-wrap gap-1 print:gap-0.5">
               {skill.keywords.map((keyword, index) => (
                 <span

@@ -6,7 +6,7 @@ const ResumeEducation = ({ educationData }) => {
       <h2 className="mb-4 text-xl font-bold text-gray-800 dark:text-gray-200">Education</h2>
 
       {educationData.map((edu, index) => (
-        <div key={index} className="mb-6 font-mono text-black dark:text-white">
+        <div key={index} className="mb-6 font-mono text-black dark:text-white break-inside-avoid">
           <h3 className="text-lg font-semibold">{edu.institution}</h3>
           <p className="mb-2 text-sm">{edu.area}</p>
           <p className="mb-2 text-sm">{edu.studyType}</p>
