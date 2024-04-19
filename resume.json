@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Hugo Serra",
-    "label": "Full Stack Engineer, Educator",
+    "label": "Senior Full Stack Engineer & Team Leader @ Runtime Revolution",
     "image": "https://avatars.githubusercontent.com/u/1885131?v=4",
     "email": "",
     "phone": "",
@@ -13,28 +13,44 @@
         "username": "hugo-serra",
         "url": "https://gitconnected.com/hugo-serra"
       },
-      { "network": "GitHub", "username": "hugo-serra", "url": "https://github.com/hugo-serra" },
+      {
+        "network": "GitHub",
+        "username": "hugo-serra",
+        "url": "https://github.com/hugo-serra"
+      },
       {
         "network": "LinkedIn",
         "url": "https://www.linkedin.com/in/hserra0",
         "username": "hserra0"
       },
-      { "network": "Twitter", "url": "https://twitter.com/hserra0", "username": "hserra0" },
+      {
+        "network": "Twitter",
+        "url": "https://twitter.com/hserra0",
+        "username": "hserra0"
+      },
       {
         "network": "Stack Overflow",
         "url": "https://stackoverflow.com/users/18748988/hserra",
         "username": "hserra"
       },
-      { "network": "Medium", "url": "https://hserra.medium.com/", "username": "hserra.medium.com" },
-      { "network": "HackerRank", "url": "https://www.hackerrank.com/hserra", "username": "hserra" }
+      {
+        "network": "Medium",
+        "url": "https://hserra.medium.com/",
+        "username": "hserra.medium.com"
+      },
+      {
+        "network": "HackerRank",
+        "url": "https://www.hackerrank.com/hserra",
+        "username": "hserra"
+      }
     ],
-    "headline": "Alone we can go faster. Together, farther. Helping clients and developers create great products.",
+    "headline": "Alone we can go faster. Together, farther.",
     "blog": "https://hserra.dev/blog",
-    "yearsOfExperience": 10,
+    "yearsOfExperience": 11,
     "username": "hugo-serra",
     "locationAsString": "Lisbon, Portugal",
     "region": "Lisbon, Portugal",
-    "karma": 19,
+    "karma": 22,
     "id": "3ed9fa6c-fc8e-4f59-896c-85f571d83f11",
     "followers": 5,
     "following": 4,
@@ -63,7 +79,7 @@
         "Pillow"
       ],
       "rating": 5,
-      "yearsOfExperience": 5
+      "yearsOfExperience": 6
     },
     {
       "name": "React",
@@ -89,7 +105,7 @@
         "Mantine"
       ],
       "rating": 5,
-      "yearsOfExperience": 5
+      "yearsOfExperience": 6
     },
     {
       "name": "Cloud Operations (CloudOps)",
@@ -110,7 +126,7 @@
         "ELK"
       ],
       "rating": 4,
-      "yearsOfExperience": 4
+      "yearsOfExperience": 5
     },
     {
       "name": "Team Management",
@@ -132,35 +148,10 @@
         "Onboarding"
       ],
       "rating": 5,
-      "yearsOfExperience": 6
+      "yearsOfExperience": 7
     }
   ],
-  "projects": [
-    {
-      "name": "test",
-      "description": "",
-      "url": "",
-      "highlights": [],
-      "keywords": [],
-      "roles": [],
-      "startDate": "",
-      "endDate": "",
-      "entity": "",
-      "type": "",
-      "displayName": "test",
-      "website": "",
-      "summary": "",
-      "primaryLanguage": "",
-      "languages": [],
-      "libraries": [],
-      "githubUrl": "",
-      "repositoryUrl": "",
-      "start": { "year": null, "month": null, "day": null },
-      "end": { "year": null, "month": null, "day": null },
-      "images": [],
-      "videos": []
-    }
-  ],
+  "projects": [],
   "work": [
     {
       "name": "AMS (Alexander Mann Solutions)",
@@ -170,10 +161,13 @@
       "url": "https://www.weareams.com/",
       "startDate": "2023-04-01",
       "endDate": "",
-      "summary": "Worked with the client to create a new product, setup the team, and plan the development from start to production. My main responsibilities are managing the team and being the leading role in engineering, meaning managing infrastructure, planning developments, defining architecture, as well as setting the team up for success with all development.\nThe main technologies are: Python, Django, Django REST Framework, Azure, Azure DevOps CI/CD, wagtail CMS, Next.js, Nextauth.js, Tailwind CSS, React, React Query, Typescript, Open AI ChatGPT, etc...",
+      "summary": "At AMS, I've been entrusted with the leadership and architectural direction of our B2B Software Review Platform. This platform serves as a valuable tool for businesses, offering them unbiased reviews, comparisons, and pricing insights. In conjunction with AMS's consulting services, we've crafted a solution that's both informative and practical.\n\nSystem Design: I took the lead in designing the system architecture, ensuring it aligned with industry best practices and our specific needs. One of my proudest moments was successfully integrating the CMS with our main product, a step that enabled us to offer more targeted content suggestions to our users.\n\nTeam Leadership: As the lead of a 14-member team, I helped navigate our workflow using Agile & Scrum methodologies, incorporating Kanban for certain product development stages. My role also extended to the hiring realm, where I played a part in recruiting and interviewing potential team members.\n\nTechnological Implementation:\n\nCloud/Infrastructure: With a focus on robustness, I guided our team to effectively utilize Azure's suite, including Docker, PostgreSQL, Azure Cloud Functions, among others.\nBackend Development: My expertise in Python, Django, and other technologies informed our backend decisions and strategies.\nFrontend Development: I steered our frontend development, choosing a mix of TypeScript, React, Next.js, and other tools to ensure a responsive and user-friendly interface.\nOur vision is broad, and with the platform's design accommodating scalability, we're poised to support a growing user base.",
       "highlights": [],
       "isCurrentRole": true,
-      "start": { "year": 2023, "month": 4 },
+      "start": {
+        "year": 2023,
+        "month": 4
+      },
       "end": {},
       "company": "AMS (Alexander Mann Solutions)",
       "website": "https://www.weareams.com/"
@@ -187,9 +181,14 @@
       "startDate": "2021-03-01",
       "endDate": "",
       "summary": "Working with clients to build amazing products and deliver great experiences. As well as participate in the selection of candidates and training of new developers at Runtime.",
-      "highlights": ["Started a new project with a client"],
+      "highlights": [
+        "Started a new project with a client"
+      ],
       "isCurrentRole": true,
-      "start": { "year": 2021, "month": 3 },
+      "start": {
+        "year": 2021,
+        "month": 3
+      },
       "end": {},
       "company": "Runtime Revolution",
       "website": "https://www.runtime-revolution.com/"
@@ -205,8 +204,14 @@
       "summary": "Helped the client create processes and an team to migrate an existing product written in Ruby to Python. The main focus was implementing swiftly with a high quality standard, both of which we achieved very successfully. The main tools for the job were Python, Django, Django REST Framework, PostgreSQL, React, Redux, React Query (migrated from redux), Azure Cloud.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2022, "month": 10 },
-      "end": { "year": 2023, "month": 6 },
+      "start": {
+        "year": 2022,
+        "month": 10
+      },
+      "end": {
+        "year": 2023,
+        "month": 6
+      },
       "company": "Nexamp",
       "website": "https://www.nexamp.com/"
     },
@@ -221,8 +226,14 @@
       "summary": "Taking the lead in creating a platform that will allow new ways for Companies, Creators and People to interact.\nBuilt with Next.js, Python and Django, PostgreSQL, Docker, AWS",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2022, "month": 2 },
-      "end": { "year": 2022, "month": 9 },
+      "start": {
+        "year": 2022,
+        "month": 2
+      },
+      "end": {
+        "year": 2022,
+        "month": 9
+      },
       "company": "Zettlor",
       "website": "https://www.zettlor.com/"
     },
@@ -240,8 +251,14 @@
         "Helped mentor and assist multiple teams geographically dispersed around the world"
       ],
       "isCurrentRole": false,
-      "start": { "year": 2021, "month": 3 },
-      "end": { "year": 2022, "month": 3 },
+      "start": {
+        "year": 2021,
+        "month": 3
+      },
+      "end": {
+        "year": 2022,
+        "month": 3
+      },
       "company": "Worldbox Business Intelligence",
       "website": "https://worldbox.net/"
     },
@@ -259,8 +276,14 @@
         "Started to automate most of the processes the client has running for their business, as well as allowing these processes to be configured by the client"
       ],
       "isCurrentRole": false,
-      "start": { "year": 2020, "month": 4 },
-      "end": { "year": 2021, "month": 3 },
+      "start": {
+        "year": 2020,
+        "month": 4
+      },
+      "end": {
+        "year": 2021,
+        "month": 3
+      },
       "company": "Worldbox Business Intelligence",
       "website": "https://worldbox.net/"
     },
@@ -275,8 +298,14 @@
       "summary": "Worked with clients as a Senior Software Engineer",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2020, "month": 3 },
-      "end": { "year": 2021, "month": 3 },
+      "start": {
+        "year": 2020,
+        "month": 3
+      },
+      "end": {
+        "year": 2021,
+        "month": 3
+      },
       "company": "Runtime Revolution",
       "website": "https://www.runtime-revolution.com/"
     },
@@ -291,8 +320,14 @@
       "summary": "Worked as a Nearshore Consultant and team leader for the Stellantis Group and as a Consultant for SIBS Processos",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2018, "month": 7 },
-      "end": { "year": 2020, "month": 3 },
+      "start": {
+        "year": 2018,
+        "month": 7
+      },
+      "end": {
+        "year": 2020,
+        "month": 3
+      },
       "company": "Alter Solutions Portugal",
       "website": "https://alter-solutions.com/en/"
     },
@@ -307,8 +342,14 @@
       "summary": "Worked with PHP, Python and Javascript to perform payments platform integrations in multiple providers",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2019, "month": 8 },
-      "end": { "year": 2020, "month": 2 },
+      "start": {
+        "year": 2019,
+        "month": 8
+      },
+      "end": {
+        "year": 2020,
+        "month": 2
+      },
       "company": "SIBS Processos",
       "website": "https://www.sibs.com/"
     },
@@ -323,8 +364,14 @@
       "summary": "Full Stack Web Development using Laravel, MariaDB and Angular. Worked on projects to manage the manufacturing and documentation production. I also was responsible for the latter project and did some mentoring.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2018, "month": 7 },
-      "end": { "year": 2019, "month": 7 },
+      "start": {
+        "year": 2018,
+        "month": 7
+      },
+      "end": {
+        "year": 2019,
+        "month": 7
+      },
       "company": "Stellantis",
       "website": "https://www.stellantis.com/en"
     },
@@ -342,8 +389,14 @@
         "Developed the recruitment algorithm and framework for the website"
       ],
       "isCurrentRole": false,
-      "start": { "year": 2017, "month": 10 },
-      "end": { "year": 2018, "month": 6 },
+      "start": {
+        "year": 2017,
+        "month": 10
+      },
+      "end": {
+        "year": 2018,
+        "month": 6
+      },
       "company": "sympl",
       "website": "https://gosympl.com/"
     },
@@ -358,8 +411,14 @@
       "summary": "Worked in Consulting for 1 clients, one of them in a nearshore model",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2016, "month": 4 },
-      "end": { "year": 2018, "month": 6 },
+      "start": {
+        "year": 2016,
+        "month": 4
+      },
+      "end": {
+        "year": 2018,
+        "month": 6
+      },
       "company": "BOLD by Devoteam",
       "website": "https://bold.devoteam.com/"
     },
@@ -374,8 +433,14 @@
       "summary": "Full Stack Web Development for Sapo Voucher.\nAndroid development.\nTechnologies: PHP, Codeigniter, Ink (by Sapo), Prototype.js, Javascript, Java.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2016, "month": 4 },
-      "end": { "year": 2017, "month": 9 },
+      "start": {
+        "year": 2016,
+        "month": 4
+      },
+      "end": {
+        "year": 2017,
+        "month": 9
+      },
       "company": "SAPO",
       "website": "https://www.sapo.pt/"
     },
@@ -390,8 +455,14 @@
       "summary": "Had the leading role in the development of the SaaS product the company was developing, in PHP with Laravel and Javascript.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2015, "month": 10 },
-      "end": { "year": 2017, "month": 4 },
+      "start": {
+        "year": 2015,
+        "month": 10
+      },
+      "end": {
+        "year": 2017,
+        "month": 4
+      },
       "company": "CrowdPlanners",
       "website": ""
     },
@@ -404,10 +475,18 @@
       "startDate": "2015-10-01",
       "endDate": "2016-03-01",
       "summary": "Full Stack development in PHP and Javascript in a B2B Platform for the real estate market",
-      "highlights": ["Participated in the development of a key B2B platform for the company"],
+      "highlights": [
+        "Participated in the development of a key B2B platform for the company"
+      ],
       "isCurrentRole": false,
-      "start": { "year": 2015, "month": 10 },
-      "end": { "year": 2016, "month": 3 },
+      "start": {
+        "year": 2015,
+        "month": 10
+      },
+      "end": {
+        "year": 2016,
+        "month": 3
+      },
       "company": "OLX Group",
       "website": "https://www.olxgroup.com/"
     },
@@ -425,8 +504,14 @@
         "Implemented SSL for some of the communication that the platforms performed"
       ],
       "isCurrentRole": false,
-      "start": { "year": 2015, "month": 3 },
-      "end": { "year": 2015, "month": 9 },
+      "start": {
+        "year": 2015,
+        "month": 3
+      },
+      "end": {
+        "year": 2015,
+        "month": 9
+      },
       "company": "Gatewit",
       "website": "https://gatewit.com/"
     },
@@ -441,8 +526,14 @@
       "summary": "Development of Business Assurance and Incentives Management projects for clients in Asia and the Middle East",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2013, "month": 6 },
-      "end": { "year": 2015, "month": 2 },
+      "start": {
+        "year": 2013,
+        "month": 6
+      },
+      "end": {
+        "year": 2015,
+        "month": 2
+      },
       "company": "WeDo Technologies",
       "website": "https://www.mobileum.com/"
     },
@@ -457,8 +548,14 @@
       "summary": "Develop a Master's Thesis on Cloud Computing, Internet of Things, Smart Robotics and Machine Learning.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2012, "month": 11 },
-      "end": { "year": 2013, "month": 11 },
+      "start": {
+        "year": 2012,
+        "month": 11
+      },
+      "end": {
+        "year": 2013,
+        "month": 11
+      },
       "company": "YDreams Robotics",
       "website": ""
     },
@@ -473,8 +570,14 @@
       "summary": "Configuring Software and Installing Systems.\nRepairing computers.",
       "highlights": [],
       "isCurrentRole": false,
-      "start": { "year": 2007, "month": 6 },
-      "end": { "year": 2007, "month": 7 },
+      "start": {
+        "year": 2007,
+        "month": 6
+      },
+      "end": {
+        "year": 2007,
+        "month": 7
+      },
       "company": "TNMC - SOLUÇÕES DE INFORMÁTICA, Lda",
       "website": "https://tnmc.pt/"
     }
@@ -486,7 +589,11 @@
       "releaseDate": "2013-08-14",
       "url": "http://link.springer.com/chapter/10.1007/978-3-642-35016-0_1",
       "summary": "",
-      "fullReleaseDate": { "year": 2013, "month": 8, "day": 14 },
+      "fullReleaseDate": {
+        "year": 2013,
+        "month": 8,
+        "day": 14
+      },
       "website": "http://link.springer.com/chapter/10.1007/978-3-642-35016-0_1"
     }
   ],
@@ -502,8 +609,14 @@
       "courses": [],
       "description": "",
       "activities": "Seminários IST-Tagus 2011",
-      "start": { "year": 2011, "month": null },
-      "end": { "year": 2013, "month": null },
+      "start": {
+        "year": 2011,
+        "month": null
+      },
+      "end": {
+        "year": 2013,
+        "month": null
+      },
       "website": "https://tecnico.ulisboa.pt/en/",
       "gpa": ""
     },
@@ -518,8 +631,14 @@
       "courses": [],
       "description": "",
       "activities": "Seminários IST-Tagus 2010",
-      "start": { "year": 2007, "month": null },
-      "end": { "year": 2012, "month": null },
+      "start": {
+        "year": 2007,
+        "month": null
+      },
+      "end": {
+        "year": 2012,
+        "month": null
+      },
       "website": "https://tecnico.ulisboa.pt/en/",
       "gpa": ""
     }
@@ -530,26 +649,51 @@
       "position": "Tech Support and Web Developer",
       "url": "https://neurolandia.pt/",
       "startDate": "2021-05-01",
-      "endDate": "",
+      "endDate": "2023-10-01",
       "summary": "",
       "highlights": [],
       "location": "Faro, Portugal",
-      "start": { "year": 2021, "month": 5 },
-      "end": { "year": null, "month": null },
+      "start": {
+        "year": 2021,
+        "month": 5
+      },
+      "end": {
+        "year": 2023,
+        "month": 10
+      },
       "website": "https://neurolandia.pt/"
     }
   ],
   "awards": [],
   "languages": [
-    { "language": "English", "fluency": "Full Professional Proficiency" },
-    { "language": "Portuguese", "fluency": "Native" },
-    { "language": "Spanish", "fluency": "Limited Working Proficiency" },
-    { "language": "French", "fluency": "Elementary Proficiency" }
+    {
+      "language": "English",
+      "fluency": "Full Professional Proficiency"
+    },
+    {
+      "language": "Portuguese",
+      "fluency": "Native"
+    },
+    {
+      "language": "Spanish",
+      "fluency": "Limited Working Proficiency"
+    },
+    {
+      "language": "French",
+      "fluency": "Elementary Proficiency"
+    }
   ],
   "interests": [
     {
       "name": "Programming",
-      "keywords": ["Python", "Django", "Next.js", "Javascript", "Typescript", "AWS"]
+      "keywords": [
+        "Python",
+        "Django",
+        "Next.js",
+        "Javascript",
+        "Typescript",
+        "AWS"
+      ]
     }
   ],
   "references": [],
@@ -560,7 +704,11 @@
       "date": "2012-05-01",
       "url": "",
       "summary": "",
-      "fullDate": { "year": 2012, "month": 5, "day": 1 },
+      "fullDate": {
+        "year": 2012,
+        "month": 5,
+        "day": 1
+      },
       "website": ""
     }
   ],
