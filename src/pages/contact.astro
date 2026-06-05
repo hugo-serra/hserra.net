@@ -128,15 +128,27 @@ const sub = contactEndpoint
             socialLinks.map(({ label, href, desc }) => (
               <li>
                 <a
-                  class="tile-link"
+                  class="tile-link social-tile"
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div class="widget-body">
-                    <span class="tile-label">{label}</span>
-                    <span class="widget-desc">{desc}</span>
-                  </div>
+                  <span class="social-name">{label}</span>
+                  <span class="social-desc">{desc}</span>
+                  <svg
+                    class="social-arrow"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
                 </a>
               </li>
             ))
@@ -284,6 +296,56 @@ const sub = contactEndpoint
     margin: 0;
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  /* Social tile: network name primary, descriptor secondary, external-link
+     arrow top-right. Composed on the DS .tile-link surface. */
+  .social-tile {
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    padding-inline-end: var(--space-8); /* room for the arrow */
+  }
+
+  .social-name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  .social-desc {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 1.4;
+  }
+
+  .social-arrow {
+    position: absolute;
+    top: var(--space-4);
+    inset-inline-end: var(--space-4);
+    color: var(--color-muted);
+    transition:
+      color var(--duration-fast) var(--ease-out-quart),
+      transform var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .social-tile:hover .social-arrow,
+  .social-tile:focus-visible .social-arrow {
+    color: var(--color-primary);
+    transform: translate(1px, -1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-arrow {
+      transition: color var(--duration-fast) var(--ease-out-quart);
+    }
+    .social-tile:hover .social-arrow,
+    .social-tile:focus-visible .social-arrow {
+      transform: none;
+    }
   }
 </style>
