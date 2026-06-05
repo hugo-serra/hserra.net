@@ -1,6 +1,11 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import resume from "../../resume.json";
+
+// Public endpoint for the self-hosted contact function (UM300 via Cloudflare
+// Tunnel). Set PUBLIC_CONTACT_ENDPOINT in the environment to enable the form;
+// when unset, the page degrades to social links only — it never POSTs to a
+// missing backend.
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
 
 const socialLinks = [
   {
@@ -24,6 +29,10 @@ const socialLinks = [
     desc: "Longer writing",
   },
 ];
+
+const sub = contactEndpoint
+  ? "Drop me a message below, or find me on LinkedIn."
+  : "The best way to reach me is via LinkedIn.";
 ---
 
 <BaseLayout
@@ -33,18 +42,84 @@ const socialLinks = [
   <div class="container">
     <div class="page-header">
       <h1>Contact</h1>
-      <p class="page-sub">The best way to reach me is via email or LinkedIn.</p>
+      <p class="page-sub">{sub}</p>
     </div>
 
     <div class="contact-layout">
-      <section class="contact-section">
-        <h2>Email</h2>
-        <p>
-          <a href="mailto:hugo.serra8@gmail.com" class="email-link">
-            hugo.serra8@gmail.com
-          </a>
-        </p>
-      </section>
+      {
+        contactEndpoint && (
+          <section class="contact-section">
+            <h2>Send a message</h2>
+            <form id="contact-form" data-endpoint={contactEndpoint} novalidate>
+              <div class="field">
+                <label class="field-label" for="cf-name">
+                  Name
+                </label>
+                <input
+                  class="field-input"
+                  id="cf-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="cf-email">
+                  Email
+                </label>
+                <input
+                  class="field-input"
+                  id="cf-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="cf-message">
+                  Message
+                </label>
+                <textarea
+                  class="field-textarea"
+                  id="cf-message"
+                  name="message"
+                  rows="6"
+                  required
+                />
+              </div>
+
+              {/* Honeypot — hidden from humans, catches naive bots. */}
+              <div class="cf-hp" aria-hidden="true">
+                <label for="cf-company">Company</label>
+                <input
+                  id="cf-company"
+                  name="company"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div
+                id="cf-status"
+                class="cf-status"
+                role="status"
+                aria-live="polite"
+              />
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit" id="cf-submit">
+                  Send message
+                </button>
+              </div>
+            </form>
+          </section>
+        )
+      }
 
       <section class="contact-section">
         <h2>Elsewhere</h2>
@@ -71,6 +146,87 @@ const socialLinks = [
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById(
+    "contact-form"
+  ) as HTMLFormElement | null;
+
+  if (form) {
+    const endpoint = form.dataset.endpoint!;
+    const submit = document.getElementById("cf-submit") as HTMLButtonElement;
+    const status = document.getElementById("cf-status")!;
+
+    const setStatus = (
+      kind: "info" | "danger",
+      title: string,
+      desc: string
+    ) => {
+      status.className = `cf-status alert alert-${kind}`;
+      status.innerHTML = `<div class="alert-body"><span class="alert-title"></span><span class="alert-desc"></span></div>`;
+      (status.querySelector(".alert-title") as HTMLElement).textContent = title;
+      (status.querySelector(".alert-desc") as HTMLElement).textContent = desc;
+    };
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      // Honeypot: a filled hidden field means a bot. Pretend success, do nothing.
+      const data = new FormData(form);
+      if ((data.get("company") as string)?.trim()) {
+        setStatus("info", "Message sent", "Thanks — I'll get back to you.");
+        form.reset();
+        return;
+      }
+
+      const payload = {
+        name: (data.get("name") as string)?.trim(),
+        email: (data.get("email") as string)?.trim(),
+        message: (data.get("message") as string)?.trim(),
+      };
+
+      if (!payload.name || !payload.email || !payload.message) {
+        setStatus(
+          "danger",
+          "Missing fields",
+          "Please fill in your name, email, and message."
+        );
+        return;
+      }
+
+      submit.classList.add("btn--loading");
+      submit.setAttribute("aria-busy", "true");
+      submit.disabled = true;
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        setStatus(
+          "info",
+          "Message sent",
+          "Thanks — I'll get back to you soon."
+        );
+        form.reset();
+      } catch (err) {
+        setStatus(
+          "danger",
+          "Couldn't send message",
+          "Something went wrong. Please try again, or reach me on LinkedIn."
+        );
+      } finally {
+        submit.classList.remove("btn--loading");
+        submit.removeAttribute("aria-busy");
+        submit.disabled = false;
+      }
+    });
+  }
+</script>
 
 <style>
   .page-header {
@@ -102,9 +258,24 @@ const socialLinks = [
     margin-block-end: var(--space-4);
   }
 
-  .email-link {
-    font-size: var(--text-md);
-    color: var(--color-primary);
+  #contact-form .field {
+    margin-block-end: var(--space-4);
+  }
+
+  .cf-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .cf-status:not(.alert) {
+    display: none;
+  }
+
+  .cf-status.alert {
+    margin-block-end: var(--space-4);
   }
 
   .social-list {
