@@ -19,5 +19,13 @@ module.exports = {
       },
       rules: {},
     },
+    {
+      // Client-side `<script>` blocks are extracted to virtual `*.astro/*.js`
+      // files. Astro compiles them as TypeScript, so lint them with the TS
+      // parser — otherwise TS-only syntax (casts, non-null assertions) errors.
+      files: ["**/*.astro/*.js", "*.astro/*.js"],
+      parser: "@typescript-eslint/parser",
+      rules: {},
+    },
   ],
 };
