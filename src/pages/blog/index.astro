@@ -6,7 +6,8 @@ import getSortedPosts from "@utils/getSortedPosts";
 const posts = await getCollection("blog");
 const sorted = getSortedPosts(posts);
 
-function readingTime(body: string): number {
+function readingTime(body: string | undefined): number {
+  if (!body) return 1;
   const words = body.trim().split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
 }
