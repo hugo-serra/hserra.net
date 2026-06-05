@@ -1,163 +1,217 @@
 ---
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
-import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
 
 const posts = await getCollection("blog");
+const latestPost = getSortedPosts(posts)[0];
 
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-
-const socialCount = SOCIALS.filter(social => social.active).length;
+const skills = [
+  {
+    layer: "Backend",
+    items: [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "Flask",
+      "Node.js",
+      "Express.js",
+    ],
+  },
+  {
+    layer: "Frontend",
+    items: ["React", "Next.js", "TypeScript", "Redux", "React Query"],
+  },
+  {
+    layer: "Infrastructure",
+    items: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform", "PostgreSQL"],
+  },
+  {
+    layer: "Leadership",
+    items: [
+      "Team Management",
+      "Agile / Scrum",
+      "Mentoring",
+      "Hiring",
+      "Architecture",
+    ],
+  },
+];
 ---
 
-<Layout>
-  <Header />
-  <main id="main-content">
-    <section id="hero">
-      <h1>Mingalaba</h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="rss-link"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
-          ><path
-            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
-          ></path><path
-            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
-          ></path><circle cx="6" cy="18" r="2"></circle>
-        </svg>
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
+<BaseLayout
+  title="Hugo Serra — Software Engineer"
+  description="Hugo Serra is a senior full stack engineer and team leader based in Lisbon, Portugal."
+>
+  <div class="container">
+    <section class="hero">
+      <h1>Hugo Serra</h1>
+      <p class="hero-sub">
+        Senior full stack engineer and team leader based in Lisbon, Portugal. I
+        build data-heavy products, lead distributed teams, and spend too much
+        time thinking about LLMs.
       </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
+      <div class="hero-links">
+        <a href="/blog" class="btn btn-primary">Read the blog</a>
+        <a href="/about" class="btn btn-ghost">About me</a>
+      </div>
     </section>
 
-    <Hr />
+    <section class="skills-section">
+      <h2>What I work with</h2>
+      <div class="skill-groups">
+        {
+          skills.map(({ layer, items }) => (
+            <div class="skill-group">
+              <h3 class="skill-layer">{layer}</h3>
+              <div class="skill-tags">
+                {items.map(item => (
+                  <span class="badge badge-muted">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
 
     {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
+      latestPost && (
+        <section class="latest-post">
+          <h2>Latest post</h2>
+          <ul class="post-list">
+            <li class="post-item">
+              <a
+                class="post-item-link"
+                href={`/blog/${latestPost.data.slug ?? latestPost.id.replace(/\.mdx?$/, "")}`}
+              >
+                <div class="post-meta">
+                  <time
+                    class="post-date"
+                    datetime={latestPost.data.pubDatetime.toISOString()}
+                  >
+                    {latestPost.data.pubDatetime.toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </time>
+                </div>
+                <h2 class="post-title">{latestPost.data.title}</h2>
+                <p class="post-excerpt">{latestPost.data.description}</p>
+              </a>
+              <div class="post-tags">
+                {latestPost.data.tags.map(tag => (
+                  <span class="badge badge-muted">{tag}</span>
+                ))}
+              </div>
+            </li>
           </ul>
+          <a href="/blog" class="all-posts-link">
+            All posts →
+          </a>
         </section>
       )
     }
-
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div>
-  </main>
-
-  <Footer />
-</Layout>
+  </div>
+</BaseLayout>
 
 <style>
-  /* ===== Hero Section ===== */
-  #hero {
-    @apply pb-6 pt-8;
-  }
-  #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
-  }
-  #hero .rss-link {
-    @apply mb-6;
-  }
-  #hero .rss-icon {
-    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
-  }
-  #hero p {
-    @apply my-2;
-  }
-  .social-wrapper {
-    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
-  }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
+  .hero {
+    padding-block: var(--space-16) var(--space-12);
+    max-width: 48rem;
   }
 
-  /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
-  #recent-posts {
-    @apply pb-6 pt-12;
+  .hero h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-4);
   }
-  #featured h2,
-  #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+
+  @media (min-width: 640px) {
+    .hero h1 {
+      font-size: clamp(var(--text-2xl), 5vw, 3rem);
+    }
   }
-  .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+
+  .hero-sub {
+    color: var(--color-muted);
+    font-size: var(--text-md);
+    line-height: 1.7;
+    max-width: 44ch;
+    margin-block-end: var(--space-8);
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .skills-section {
+    padding-block: var(--space-12);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .skills-section h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-6);
+  }
+
+  .skill-groups {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .skill-groups {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .skill-groups {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .skill-layer {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1-5);
+  }
+
+  .latest-post {
+    padding-block: var(--space-12);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .latest-post h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-6);
+  }
+
+  .all-posts-link {
+    display: inline-block;
+    margin-block-start: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
   }
 </style>

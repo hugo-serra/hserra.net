@@ -1,0 +1,221 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import resume from "../../resume.json";
+
+type WorkEntry = (typeof resume.work)[number];
+type EducationEntry = (typeof resume.education)[number];
+
+function formatPeriod(entry: WorkEntry | EducationEntry): string {
+  const start = new Date(entry.startDate);
+  const startYear = start.getFullYear();
+  const end = entry.endDate ? new Date(entry.endDate).getFullYear() : "present";
+  return `${startYear}–${end}`;
+}
+
+const skills = resume.skills;
+const profiles = resume.basics.profiles.filter(p =>
+  ["GitHub", "LinkedIn", "Twitter"].includes(p.network)
+);
+---
+
+<BaseLayout
+  title="Resume — Hugo Serra"
+  description="Hugo Serra's resume: senior full stack engineer and team leader with 17+ years of experience."
+>
+  <div class="container">
+    <div class="resume-header">
+      <div>
+        <h1>{resume.basics.name}</h1>
+        <p class="resume-label">{resume.basics.label}</p>
+        <p class="resume-location">{resume.basics.locationAsString}</p>
+      </div>
+      <div class="resume-actions">
+        {
+          profiles.map(p => (
+            <a
+              href={p.url}
+              class="btn btn-ghost btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {p.network}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <section class="resume-section">
+      <h2>Summary</h2>
+      <article class="prose">
+        <p>{resume.basics.summary}</p>
+      </article>
+    </section>
+
+    <section class="resume-section">
+      <h2>Experience</h2>
+      <dl class="timeline">
+        {
+          resume.work.map(job => (
+            <div class="timeline-entry">
+              <dt class="timeline-period">{formatPeriod(job)}</dt>
+              <dd class="timeline-body">
+                <span class="timeline-org">{job.name}</span>
+                <span
+                  class="timeline-role"
+                  style={
+                    job.isCurrentRole
+                      ? "color: var(--color-primary)"
+                      : undefined
+                  }
+                >
+                  {job.position}
+                </span>
+                {job.summary && <p class="timeline-desc">{job.summary}</p>}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="resume-section">
+      <h2>Education</h2>
+      <dl class="timeline">
+        {
+          resume.education.map((edu: EducationEntry) => (
+            <div class="timeline-entry">
+              <dt class="timeline-period">{formatPeriod(edu)}</dt>
+              <dd class="timeline-body">
+                <span class="timeline-org">{edu.institution}</span>
+                <span class="timeline-role">
+                  {edu.studyType} {edu.area}
+                </span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="resume-section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        {
+          skills.map(skill => (
+            <div class="skill-block">
+              <h3 class="skill-name">{skill.name}</h3>
+              <div class="skill-keywords">
+                {skill.keywords.map(kw => (
+                  <span class="badge badge-muted">{kw}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Languages</h2>
+      <dl class="stat-list stat-list--ruled">
+        {
+          resume.languages.map(
+            (lang: { language: string; fluency: string }) => (
+              <div class="stat-row">
+                <dt class="stat-label">{lang.language}</dt>
+                <dd class="stat-value stat-value--muted">{lang.fluency}</dd>
+              </div>
+            )
+          )
+        }
+      </dl>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .resume-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-block: var(--space-12) var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+    margin-block-end: var(--space-8);
+  }
+
+  .resume-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-1);
+  }
+
+  .resume-label {
+    color: var(--color-ink);
+    font-size: var(--text-md);
+    margin-block-end: var(--space-1);
+  }
+
+  .resume-location {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+
+  .resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+
+  .resume-section {
+    padding-block: var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+    max-width: 56rem;
+  }
+
+  .resume-section:last-child {
+    border-bottom: none;
+    padding-block-end: var(--space-16);
+  }
+
+  .resume-section h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-6);
+  }
+
+  .skills-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .skill-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .skill-name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .skill-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1-5);
+  }
+</style>

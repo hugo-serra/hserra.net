@@ -1,42 +1,26 @@
 ---
-import { SITE } from "@config";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
-  <Header />
-
-  <main id="main-content">
-    <div class="not-found-wrapper">
-      <h1 aria-label="404 Not Found">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p>Page Not Found</p>
-      <LinkButton
-        href="/"
-        className="my-6 text-lg underline decoration-dashed underline-offset-8"
-      >
-        Go back home
-      </LinkButton>
+<BaseLayout title="404 — Hugo Serra" description="Page not found.">
+  <div class="container not-found">
+    <div class="empty">
+      <p class="empty-title">404 — Page not found</p>
+      <p class="empty-desc">¯\_(ツ)_/¯ This page doesn't exist.</p>
+      <div class="empty-actions">
+        <a href="/" class="btn btn-primary">Go home</a>
+        <a href="/blog" class="btn btn-ghost">Read the blog</a>
+      </div>
     </div>
-  </main>
-
-  <Footer />
-</Layout>
+  </div>
+</BaseLayout>
 
 <style>
-  #main-content {
-    @apply mx-auto flex max-w-3xl flex-1 items-center justify-center;
-  }
-  .not-found-wrapper {
-    @apply mb-14 flex flex-col items-center justify-center;
-  }
-  .not-found-wrapper h1 {
-    @apply text-9xl font-bold text-skin-accent;
-  }
-  .not-found-wrapper p {
-    @apply mt-4 text-2xl sm:text-3xl;
+  .not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding-block: var(--space-16);
   }
 </style>

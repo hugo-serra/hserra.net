@@ -9,6 +9,22 @@ Personal website and blog. Built with Astro, styled with the `@hs/design` design
 - **Blog spec:** `projects/2026-03-31_blog.md`
 - **Resume spec:** `projects/2026-03-31_resume.md`
 
+## Vercel deploy — SSH key setup (one-time)
+
+`@hs/design` is installed via SSH (`git+ssh://git@github.com:hugo-serra/design.git`). `vercel.json` provides a custom install command that sets up the key before `bun install`. To activate it:
+
+1. Generate a deploy key (or reuse an existing ed25519 key):
+   ```bash
+   ssh-keygen -t ed25519 -f design-deploy-key -N ""
+   ```
+2. Add `design-deploy-key.pub` as a **Deploy key** (read-only) on the `hugo-serra/design` GitHub repo → Settings → Deploy keys.
+3. In Vercel → Project → Settings → Environment Variables, add:
+   - **Name:** `DESIGN_SSH_KEY`
+   - **Value:** the full content of `design-deploy-key` (private key, including `-----BEGIN` / `-----END` lines)
+   - Environments: Production, Preview, Development
+
+The `vercel.json` install command writes this key to `~/.ssh/id_ed25519` at build time and adds `github.com` to `known_hosts` before running `bun install`.
+
 ## Design system
 
 **All visual decisions come from `@hs/design`.** Before writing any CSS or HTML, read:

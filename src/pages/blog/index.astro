@@ -1,0 +1,90 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import getSortedPosts from "@utils/getSortedPosts";
+
+const posts = await getCollection("blog");
+const sorted = getSortedPosts(posts);
+
+function readingTime(body: string): number {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+---
+
+<BaseLayout
+  title="Blog — Hugo Serra"
+  description="Articles on engineering, leadership, AI, and building software."
+>
+  <div class="container">
+    <div class="page-header">
+      <h1>Blog</h1>
+      <p class="page-sub">
+        Writing on engineering, leadership, and building things.
+      </p>
+    </div>
+
+    {
+      sorted.length === 0 ? (
+        <div class="empty">
+          <p class="empty-title">No posts yet</p>
+          <p class="empty-desc">Check back soon.</p>
+        </div>
+      ) : (
+        <ul class="post-list">
+          {sorted.map(post => (
+            <li class="post-item">
+              <a
+                class="post-item-link"
+                href={`/blog/${post.data.slug ?? post.id.replace(/\.mdx?$/, "")}`}
+              >
+                <div class="post-meta">
+                  <time
+                    class="post-date"
+                    datetime={post.data.pubDatetime.toISOString()}
+                  >
+                    {post.data.pubDatetime.toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </time>
+                  <span class="post-sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <span class="post-read-time">
+                    {readingTime(post.body)} min read
+                  </span>
+                </div>
+                <h2 class="post-title">{post.data.title}</h2>
+                <p class="post-excerpt">{post.data.description}</p>
+              </a>
+              <div class="post-tags">
+                {post.data.tags.map(tag => (
+                  <span class="badge badge-muted">{tag}</span>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: var(--space-12) var(--space-8);
+  }
+
+  .page-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-2);
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    font-size: var(--text-md);
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import getSortedPosts from "@utils/getSortedPosts";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection("blog");
+  return posts.map(post => ({
+    params: { slug: post.data.slug ?? post.id.replace(/\.mdx?$/, "") },
+    props: { post },
+  }));
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function readingTime(body: string | undefined): number {
+  if (!body) return 1;
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+const minutes = readingTime(post.body);
+const pubDate = post.data.pubDatetime;
+const modDate = post.data.modDatetime;
+---
+
+<BaseLayout
+  title={`${post.data.title} — Hugo Serra`}
+  description={post.data.description}
+  pubDatetime={pubDate}
+  modDatetime={modDate}
+>
+  <div
+    class="reading-bar"
+    id="reading-bar"
+    role="presentation"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container">
+    <div class="post-wrap">
+      <a href="/blog" class="back-link">← Blog</a>
+
+      <header class="post-header">
+        <h1 class="post-heading">{post.data.title}</h1>
+        <div class="post-meta">
+          <time class="post-date" datetime={pubDate.toISOString()}>
+            {
+              pubDate.toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })
+            }
+          </time>
+          <span class="post-sep" aria-hidden="true">·</span>
+          <span class="post-read-time">{minutes} min read</span>
+          {
+            modDate && (
+              <>
+                <span class="post-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span class="post-updated">
+                  Updated{" "}
+                  <time datetime={modDate.toISOString()}>
+                    {modDate.toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </time>
+                </span>
+              </>
+            )
+          }
+        </div>
+        <div class="post-tags">
+          {
+            post.data.tags.map(tag => (
+              <span class="badge badge-muted">{tag}</span>
+            ))
+          }
+        </div>
+      </header>
+
+      <article class="prose">
+        <Content />
+      </article>
+
+      <footer class="post-footer">
+        <a href="/blog" class="btn btn-ghost">← Back to blog</a>
+      </footer>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .post-wrap {
+    padding-block: var(--space-8) var(--space-16);
+    max-width: 48rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    margin-block-end: var(--space-8);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .post-updated {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+  }
+
+  .post-footer {
+    margin-block-start: var(--space-12);
+    padding-block-start: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
+
+<script>
+  const bar = document.getElementById("reading-bar");
+  if (bar) {
+    document.addEventListener(
+      "scroll",
+      () => {
+        const doc = document.documentElement;
+        const pct = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+        bar.style.setProperty(
+          "--reading-progress",
+          `${Math.min(pct * 100, 100)}%`
+        );
+      },
+      { passive: true }
+    );
+  }
+</script>

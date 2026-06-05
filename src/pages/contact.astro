@@ -1,0 +1,118 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import resume from "../../resume.json";
+
+const socialLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/hugo-serra",
+    desc: "Code and projects",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/hserra0",
+    desc: "Professional profile",
+  },
+  {
+    label: "Twitter / X",
+    href: "https://twitter.com/hserra0",
+    desc: "@hserra0",
+  },
+  {
+    label: "Medium",
+    href: "https://hserra.medium.com/",
+    desc: "Longer writing",
+  },
+];
+---
+
+<BaseLayout
+  title="Contact — Hugo Serra"
+  description="Get in touch with Hugo Serra."
+>
+  <div class="container">
+    <div class="page-header">
+      <h1>Contact</h1>
+      <p class="page-sub">The best way to reach me is via email or LinkedIn.</p>
+    </div>
+
+    <div class="contact-layout">
+      <section class="contact-section">
+        <h2>Email</h2>
+        <p>
+          <a href="mailto:hugo.serra8@gmail.com" class="email-link">
+            hugo.serra8@gmail.com
+          </a>
+        </p>
+      </section>
+
+      <section class="contact-section">
+        <h2>Elsewhere</h2>
+        <ul class="social-list">
+          {
+            socialLinks.map(({ label, href, desc }) => (
+              <li>
+                <a
+                  class="tile-link"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div class="widget-body">
+                    <span class="tile-label">{label}</span>
+                    <span class="widget-desc">{desc}</span>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: var(--space-12) var(--space-8);
+  }
+
+  .page-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-2);
+  }
+
+  .page-sub {
+    color: var(--color-muted);
+    font-size: var(--text-md);
+  }
+
+  .contact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+    padding-block-end: var(--space-16);
+    max-width: 36rem;
+  }
+
+  .contact-section h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-4);
+  }
+
+  .email-link {
+    font-size: var(--text-md);
+    color: var(--color-primary);
+  }
+
+  .social-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+</style>

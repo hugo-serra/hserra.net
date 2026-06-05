@@ -33,3 +33,5 @@ pnpm-debug.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+design-deploy-key
+design-deploy-key.pub

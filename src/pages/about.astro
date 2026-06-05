@@ -1,0 +1,173 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About — Hugo Serra"
+  description="Background, experience, and education of Hugo Serra, senior full stack engineer and team leader."
+>
+  <div class="container">
+    <div class="page-header">
+      <h1>About</h1>
+    </div>
+
+    <div class="about-layout">
+      <article class="prose">
+        <p>
+          I'm a senior full stack software engineer and team leader based in
+          Lisbon, Portugal, currently working at Runtime Revolution and leading
+          a team at AMS (Alexander Mann Solutions).
+        </p>
+        <p>
+          Over the past decade I've built and shipped data-heavy, large-scale
+          products where performance is non-negotiable and downtime is
+          unacceptable. I care deeply about the people I work with — training,
+          mentoring, and growing teams is as important to me as writing good
+          code.
+        </p>
+        <p>
+          My current obsession is AI and Large Language Models: how to integrate
+          them responsibly into products and how to use them to make engineering
+          teams faster without sacrificing quality.
+        </p>
+        <p>
+          Outside of work I'm interested in photography, trail running, and
+          building tools that scratch my own itches — this site being one of
+          them.
+        </p>
+      </article>
+
+      <section class="experience-section">
+        <h2>Experience</h2>
+        <dl class="timeline">
+          <div class="timeline-entry">
+            <dt class="timeline-period">2023–present</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">AMS (Alexander Mann Solutions)</span>
+              <span class="timeline-role" style="color: var(--color-primary)"
+                >Team Leader & Senior Software Engineer</span
+              >
+              <p class="timeline-desc">
+                Leading a 14-person team building a B2B software review
+                platform. Responsible for system architecture, integrating CMS
+                with the main product, and running Agile & Scrum workflows.
+                Stack: Python, Django, React, Next.js, TypeScript, Azure,
+                Docker, PostgreSQL.
+              </p>
+            </dd>
+          </div>
+
+          <div class="timeline-entry">
+            <dt class="timeline-period">2021–present</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">Runtime Revolution</span>
+              <span class="timeline-role"
+                >Senior Software Engineer & Team Leader</span
+              >
+              <p class="timeline-desc">
+                Working with clients to build products and deliver great
+                experiences. Participating in candidate selection and training
+                of new developers.
+              </p>
+            </dd>
+          </div>
+
+          <div class="timeline-entry">
+            <dt class="timeline-period">2022–2023</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">Nexamp</span>
+              <span class="timeline-role"
+                >Team Leader & Senior Software Engineer</span
+              >
+              <p class="timeline-desc">
+                Led a migration from Ruby to Python for an existing product.
+                Delivered rapidly at high quality using Python, Django, DRF,
+                PostgreSQL, React, Redux, and Azure Cloud.
+              </p>
+            </dd>
+          </div>
+
+          <div class="timeline-entry">
+            <dt class="timeline-period">2022</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">Zettlor</span>
+              <span class="timeline-role">Lead Software Engineer</span>
+              <p class="timeline-desc">
+                Built a platform for new ways for companies, creators, and
+                people to interact. Next.js, Python, Django, PostgreSQL, Docker,
+                AWS.
+              </p>
+            </dd>
+          </div>
+
+          <div class="timeline-entry">
+            <dt class="timeline-period">Earlier</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org"
+                >Worldbox BI · Alter Solutions · SIBS · Stellantis · sympl ·
+                BOLD/Devoteam · SAPO · OLX · WeDo Technologies · YDreams
+                Robotics</span
+              >
+              <span class="timeline-role">Various engineering roles</span>
+              <p class="timeline-desc">
+                17+ years across fintech, automotive, media, e-commerce, and
+                robotics — building products from prototype to production.
+              </p>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="education-section">
+        <h2>Education</h2>
+        <dl class="timeline">
+          <div class="timeline-entry">
+            <dt class="timeline-period">2011–2013</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">Instituto Superior Técnico (IST)</span>
+              <span class="timeline-role"
+                >MSc Telecommunications and Informatics Engineering</span
+              >
+            </dd>
+          </div>
+
+          <div class="timeline-entry">
+            <dt class="timeline-period">2007–2012</dt>
+            <dd class="timeline-body">
+              <span class="timeline-org">Instituto Superior Técnico (IST)</span>
+              <span class="timeline-role"
+                >BSc Telecommunications and Informatics Engineering</span
+              >
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: var(--space-12) var(--space-8);
+  }
+
+  .page-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-semibold);
+  }
+
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding-block-end: var(--space-16);
+    max-width: 48rem;
+  }
+
+  .experience-section h2,
+  .education-section h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-6);
+  }
+</style>
