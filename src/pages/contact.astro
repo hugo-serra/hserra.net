@@ -7,6 +7,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // missing backend.
 const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
 
+// Cloudflare Turnstile sitekey. When set, the form renders the challenge widget
+// and submits its token; the backend verifies it. Optional — the form still
+// works without it (backend skips verification when its secret is unset).
+const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY;
+
 const socialLinks = [
   {
     label: "GitHub",
@@ -104,6 +109,14 @@ const sub = contactEndpoint
                 />
               </div>
 
+              {turnstileSitekey && (
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={turnstileSitekey}
+                  data-theme="auto"
+                />
+              )}
+
               <div
                 id="cf-status"
                 class="cf-status"
@@ -157,6 +170,17 @@ const sub = contactEndpoint
       </section>
     </div>
   </div>
+
+  {
+    turnstileSitekey && (
+      <script
+        is:inline
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+      />
+    )
+  }
 </BaseLayout>
 
 <script>
@@ -195,6 +219,7 @@ const sub = contactEndpoint
         name: (data.get("name") as string)?.trim(),
         email: (data.get("email") as string)?.trim(),
         message: (data.get("message") as string)?.trim(),
+        turnstileToken: (data.get("cf-turnstile-response") as string) ?? "",
       };
 
       if (!payload.name || !payload.email || !payload.message) {
@@ -202,6 +227,17 @@ const sub = contactEndpoint
           "danger",
           "Missing fields",
           "Please fill in your name, email, and message."
+        );
+        return;
+      }
+
+      // If the Turnstile widget is present, it must have produced a token.
+      const hasChallenge = !!form.querySelector(".cf-turnstile");
+      if (hasChallenge && !payload.turnstileToken) {
+        setStatus(
+          "danger",
+          "Almost there",
+          "Please complete the verification challenge."
         );
         return;
       }
@@ -235,6 +271,8 @@ const sub = contactEndpoint
         submit.classList.remove("btn--loading");
         submit.removeAttribute("aria-busy");
         submit.disabled = false;
+        // Turnstile tokens are single-use — reset for any subsequent submit.
+        (window as { turnstile?: { reset: () => void } }).turnstile?.reset();
       }
     });
   }
