@@ -8,7 +8,7 @@
         "@astrojs/check": "^0.9.9",
         "@astrojs/mdx": "^6.0.2",
         "@astrojs/rss": "^4.0.18",
-        "@hs/design": "git+ssh://git@github.com:hugo-serra/design.git",
+        "@hs/design": "git+ssh://git@github.com/hugo-serra/design.git",
         "@types/react-dom": "^19.2.3",
         "astro": "^6.4.4",
         "typescript": "^5.3.3",
@@ -201,7 +201,7 @@
 
     "@fastify/busboy": ["@fastify/busboy@2.0.0", "", {}, "sha512-JUFJad5lv7jxj926GPgymrWQxxjPYuJNiNjNMzqT+HiuP6Vl3dk5xzG+8sTX96np0ZAluvaMzPsjhHZ5rNuNQQ=="],
 
-    "@hs/design": ["@hs/design@git+ssh://git@github.com:hugo-serra/design.git#f9792aa63732f029b04958273d5166bb875991e9", {}, "f9792aa63732f029b04958273d5166bb875991e9"],
+    "@hs/design": ["@hs/design@git+ssh://git@github.com/hugo-serra/design.git#f9792aa63732f029b04958273d5166bb875991e9", {}, "f9792aa63732f029b04958273d5166bb875991e9"],
 
     "@humanwhocodes/config-array": ["@humanwhocodes/config-array@0.11.13", "", { "dependencies": { "@humanwhocodes/object-schema": "^2.0.1", "debug": "^4.1.1", "minimatch": "^3.0.5" } }, "sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ=="],
 
